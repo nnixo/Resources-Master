@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class woodMiner : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public woodGain woodMinerr;
     void Start()
     {
         
@@ -13,6 +13,7 @@ public class woodMiner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        bool sekacClose = woodMinerr.getSekacClose();
+        Debug.Log(sekacClose);
     }
 }

@@ -10,9 +10,9 @@ public class woodGain : MonoBehaviour
     public int pocetDrevaZaSekundu = 1;
     private int celkovyPocetDreva = 0;
     public TextMeshProUGUI textMeshProUGUI;
-    
     public GameObject Player;
     public int backpackSize = 30;
+    
 
     void Start()
     {
@@ -66,6 +66,10 @@ public class woodGain : MonoBehaviour
         {
             sekacClose = false;
         }
+    }
+    public bool getSekacClose()
+    {
+        return sekacClose;
     }
     
 }
