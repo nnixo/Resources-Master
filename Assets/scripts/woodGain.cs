@@ -5,14 +5,12 @@ using TMPro;
 
 public class woodGain : MonoBehaviour
 {
-
     public bool sekacClose = false;
     public int pocetDrevaZaSekundu = 1;
     private int celkovyPocetDreva = 0;
     public TextMeshProUGUI textMeshProUGUI;
     public GameObject Player;
     public int backpackSize = 30;
-    
 
     void Start()
     {
@@ -28,7 +26,7 @@ public class woodGain : MonoBehaviour
     {
         if (textMeshProUGUI != null)
         {
-            textMeshProUGUI.text = "Backpack " + celkovyPocetDreva+"/"+backpackSize;
+            textMeshProUGUI.text = "Backpack " + celkovyPocetDreva + "/" + backpackSize;
         }
     }
 
@@ -39,12 +37,13 @@ public class woodGain : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (sekacClose)
             {
-                if (backpackSize <= celkovyPocetDreva) {
+                if (celkovyPocetDreva < backpackSize)
+                {
                     PridajDrevo();
                 }
                 else
                 {
-
+                    Debug.Log("Batoh je plný, nemôžeš prida viac dreva.");
                 }
             }
         }
@@ -67,9 +66,4 @@ public class woodGain : MonoBehaviour
             sekacClose = false;
         }
     }
-    public bool getSekacClose()
-    {
-        return sekacClose;
-    }
-    
 }

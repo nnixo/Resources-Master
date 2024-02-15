@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class woodMiner : MonoBehaviour
 {
-    public woodGain woodMinerr;
     void Start()
     {
-        
+        // Registrovanie funkcie, ktor· sa zavol·, keÔ sa zmenÌ hodnota sekacClose
+        EventManager.OnSekacCloseChanged.AddListener(OnSekacCloseChanged);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnSekacCloseChanged(bool newSekacCloseValue)
     {
-        bool sekacClose = woodMinerr.getSekacClose();
-        Debug.Log(sekacClose);
+        // Pouûitie hodnoty v woodMiner skripte
+        if (newSekacCloseValue)
+        {
+            Debug.Log("SekacClose sa zmenilo na true.");
+            // MÙûeö pridaù Ôalöiu logiku alebo akcie, ktorÈ chceö vykonaù
+        }
     }
 }
