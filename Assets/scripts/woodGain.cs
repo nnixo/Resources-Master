@@ -10,6 +10,9 @@ public class woodGain : MonoBehaviour
     public int pocetDrevaZaSekundu = 1;
     private int celkovyPocetDreva = 0;
     public TextMeshProUGUI textMeshProUGUI;
+    
+    public GameObject Player;
+    public int backpackSize = 30;
 
     void Start()
     {
@@ -25,24 +28,44 @@ public class woodGain : MonoBehaviour
     {
         if (textMeshProUGUI != null)
         {
-            textMeshProUGUI.text = "Wood: " + celkovyPocetDreva;
+            textMeshProUGUI.text = "Backpack " + celkovyPocetDreva+"/"+backpackSize;
         }
     }
 
-    
     IEnumerator PridavacDrevaCoroutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            PridajDrevo();
+            if (sekacClose)
+            {
+                if (backpackSize <= celkovyPocetDreva) {
+                    PridajDrevo();
+                }
+                else
+                {
+
+                }
+            }
         }
     }
 
     void PridajDrevo()
     {
         celkovyPocetDreva += pocetDrevaZaSekundu;
-        
-        UpdateText(); 
+        UpdateText();
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("sekacDreva"))
+        {
+            sekacClose = true;
+        }
+        else
+        {
+            sekacClose = false;
+        }
+    }
+    
 }
