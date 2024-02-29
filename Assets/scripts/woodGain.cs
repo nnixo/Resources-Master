@@ -6,20 +6,23 @@ using TMPro;
 public class woodGain : MonoBehaviour
 {
     public bool sekacClose = false;
-    public int pocetDrevaZaSekundu = 1;
-    private int celkovyPocetDreva = 0;
+    
+    public int celkovyPocetDreva = 0;
     public TextMeshProUGUI textMeshProUGUI;
     public GameObject Player;
     public int backpackSize = 30;
+    
+
 
     void Start()
     {
+
         StartCoroutine(PridavacDrevaCoroutine());
     }
 
     void Update()
     {
-        // Tu mÙûeö prÌpadne prid·vaù Ôalöiu logiku, ktor˙ potrebujeö
+        UpdateText();
     }
 
     void UpdateText()
@@ -27,6 +30,7 @@ public class woodGain : MonoBehaviour
         if (textMeshProUGUI != null)
         {
             textMeshProUGUI.text = "Backpack " + celkovyPocetDreva + "/" + backpackSize;
+                 
         }
     }
 
@@ -34,16 +38,17 @@ public class woodGain : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
             if (sekacClose)
             {
                 if (celkovyPocetDreva < backpackSize)
                 {
                     PridajDrevo();
                 }
-                else
+                else if(celkovyPocetDreva>backpackSize)
                 {
-                    Debug.Log("Batoh je pln˝, nemÙûeö pridaù viac dreva.");
+                    celkovyPocetDreva = backpackSize;
+                    
                 }
             }
         }
@@ -51,8 +56,8 @@ public class woodGain : MonoBehaviour
 
     void PridajDrevo()
     {
-        celkovyPocetDreva += pocetDrevaZaSekundu;
-        UpdateText();
+        celkovyPocetDreva =+backpackSize;
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -66,4 +71,5 @@ public class woodGain : MonoBehaviour
             sekacClose = false;
         }
     }
+
 }
